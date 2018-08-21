@@ -85,9 +85,11 @@
 <meta property="og:url" content="http://yoursite.com/2018/08/21/vuex使用/index.html">
 <meta property="og:site_name" content="bzy的博客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T13:24:49.907Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/1.jpeg">
+<meta property="og:updated_time" content="2018-08-21T14:32:31.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vuex使用">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/1.jpeg">
 
 
 
@@ -290,6 +292,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css-less-rem/" itemprop="url" rel="index">
+                    <span itemprop="name">css, less, rem</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -317,7 +341,38 @@
       
 
       
-        
+        <p><img src="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/1.jpeg" alt="image"><br><a id="more"></a></p>
+<h2 id="一-目录的配置"><a href="#一-目录的配置" class="headerlink" title="一 目录的配置"></a>一 目录的配置</h2><p>根据官方推荐在src目录里面创建store目录</p>
+<h2 id="二-创建store里面的文件"><a href="#二-创建store里面的文件" class="headerlink" title="二 创建store里面的文件"></a>二 创建store里面的文件</h2><p>根据官方推荐创建 actions.js, getters.js,index.js, mutations.js, mutations-types.js, state.js</p>
+<h3 id="2-1-state-js"><a href="#2-1-state-js" class="headerlink" title="2.1 state.js"></a>2.1 state.js</h3><p>state.js: 是vuex的单一状态数，用一个对象就包含了全部的应用层级状态。至此它便作为一个『唯一数据源(SSOT)』而存在。这也意味着，每个应用将仅仅包含一个 store 实例。单一状态树让我们能够直接地定位任一特定的状态片段，在调试的过程中也能轻易地取得整个当前应用状态的快照。（用来管理所有vuex状态数据）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 是vuex的单一状态数，用一个对象就包含了全部的应用层级状态</span></span><br><span class="line"><span class="comment">* 单一状态树让我们能够直接地定位任一特定的状态片段，在调试的过程中也能轻易地取得整个当前应用状态的快照。（用来管理所有vuex状态数据）</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> state = &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 城市状态，用来管理城市</span></span><br><span class="line">  city: &#123;&#125;,</span><br><span class="line">  cityList: [],</span><br><span class="line">  fullScreen: <span class="literal">true</span>,</span><br><span class="line">  palyer: <span class="literal">false</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> state;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-mutations-types-js-存取mutations相关的字符常量-一些常量"><a href="#2-2-mutations-types-js-存取mutations相关的字符常量-一些常量" class="headerlink" title="2.2 mutations-types.js  存取mutations相关的字符常量 (一些常量)"></a>2.2 mutations-types.js  存取mutations相关的字符常量 (一些常量)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 存取mutations相关的字符常量</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义常量并导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_CITY = <span class="string">'SET_CITY'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_PLAY = <span class="string">'SET_PLAY'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_FULL_SCREEN = <span class="string">'SET_FULL_SCREEN'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_CITY_LIST = <span class="string">'SET_CITY_LIST'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-mutations-js-（定义修改的操作）"><a href="#2-3-mutations-js-（定义修改的操作）" class="headerlink" title="2.3 mutations.js （定义修改的操作）"></a>2.3 mutations.js （定义修改的操作）</h3><p>更改 Vuex 的 store 中的状态的唯一方法是提交 mutation。Vuex 中的 mutations 非常类似于事件：每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation</span></span><br><span class="line"><span class="comment"> * Vuex 中的 mutations 非常类似于事件：每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入mutation-type.js里面所有的常量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">'./mutation-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个mutation可以供设置和修改值</span></span><br><span class="line"><span class="keyword">const</span> mutations = &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  * 1 表达式作为属性表达式放在方括号之内</span></span><br><span class="line"><span class="comment">  * 2 形参state （获取当前状态树的state）</span></span><br><span class="line"><span class="comment">  * 3 形参city，是提交mutation时传的参数</span></span><br><span class="line"><span class="comment">  * 4 使用mutation便于书写方便</span></span><br><span class="line"><span class="comment">  * 5 这个操作相当于往state.js里面写入city</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  [types.SET_CITY](state, city) &#123;</span><br><span class="line">    state.city = city;</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_CITY_LIST](state, list) &#123;</span><br><span class="line">    state.cityList = list;</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_FULL_SCREEN](state, flag) &#123;</span><br><span class="line">    state.fullScreen = flag;</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_PLAY](state, palyState) &#123;</span><br><span class="line">    state.palyer = palyState;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出mutation</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mutations;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-getters-js-有时候我们需要从-store-中的-state-中派生出一些状态。"><a href="#2-4-getters-js-有时候我们需要从-store-中的-state-中派生出一些状态。" class="headerlink" title="2.4 getters.js 有时候我们需要从 store 中的 state 中派生出一些状态。"></a>2.4 getters.js 有时候我们需要从 store 中的 state 中派生出一些状态。</h3><p>mapGetters 辅助函数仅仅是将 store 中的 getters 映射到局部计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 有时候我们需要从 store 中的 state 中派生出一些状态</span></span><br><span class="line"><span class="comment">* 这里的常量主要是对state里面做一些映射</span></span><br><span class="line"><span class="comment">* mapGetters 辅助函数仅仅是将 store 中的 getters 映射到局部计算属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对state里面的属性做一些映射</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> city = <span class="function"><span class="params">state</span> =&gt;</span> state.city;   <span class="comment">// 箭头函数的简写</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> cityList = <span class="function"><span class="params">state</span> =&gt;</span> state.cityList;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> fullScreen = <span class="function"><span class="params">state</span> =&gt;</span> state.fullScreen;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> palyer = <span class="function"><span class="params">state</span> =&gt;</span> state.palyer;</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-actions-js"><a href="#2-5-actions-js" class="headerlink" title="2.5 actions.js"></a>2.5 actions.js</h3><p>Action 类似于 mutation，不同在于：</p>
+<ol>
+<li>Action 提交的是 mutation，而不是直接变更状态。</li>
+<li>Action 可以包含任意异步操作。</li>
+<li>在一个动作中多次改变mutation可以封装一个action</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*  actions类似mutation</span></span><br><span class="line"><span class="comment">*  区别：</span></span><br><span class="line"><span class="comment">*  1：action提交的是mutation</span></span><br><span class="line"><span class="comment">*  2：action可以包含任意异步操作</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 使用：</span></span><br><span class="line"><span class="comment"> *  1：在一个动作中多次改变mutation可以封装一个action</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">'./mutation-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> selectList = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit, state&#125;, &#123;list, index&#125;</span>) </span>&#123;</span><br><span class="line">  commit(types.SET_CITY_LIST, list);</span><br><span class="line">  commit(types.SET_PLAY, <span class="literal">false</span>);</span><br><span class="line">  commit(types.SET_FULL_SCREEN, <span class="literal">true</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="2-6-index-js入口"><a href="#2-6-index-js入口" class="headerlink" title="2.6 index.js入口"></a>2.6 index.js入口</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 入口</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import * as obj from 'xxxx'; 会将xxxx中所有export导出的内容组合成一个对象返回。</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actions <span class="keyword">from</span> <span class="string">'./actions'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拿到getters里面的映射</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> getters <span class="keyword">from</span> <span class="string">'./getter'</span>;</span><br><span class="line"><span class="keyword">import</span> state <span class="keyword">from</span> <span class="string">'./state'</span>;</span><br><span class="line"><span class="keyword">import</span> mutations <span class="keyword">from</span> <span class="string">'./mutations'</span>;</span><br><span class="line"><span class="keyword">import</span> createdLogger <span class="keyword">from</span> <span class="string">'vuex/dist/logger'</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"><span class="keyword">const</span> debug = process.env.NODE_ENV != <span class="string">'production'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  actions,</span><br><span class="line">  getters,</span><br><span class="line">  state,</span><br><span class="line">  mutations,</span><br><span class="line">  strict: debug,</span><br><span class="line">  plugins: debug ? [createdLogger()] : []</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="三-使用"><a href="#三-使用" class="headerlink" title="三 使用"></a>三 使用</h2><h3 id="3-1-在mian-js注册store"><a href="#3-1-在mian-js注册store" class="headerlink" title="3.1 在mian.js注册store"></a>3.1 在mian.js注册store</h3><p>在main.js里面new的Vue的实例里面注册store</p>
+<h3 id="3-2-写入值，要在组件中引入mapMutations的语法糖"><a href="#3-2-写入值，要在组件中引入mapMutations的语法糖" class="headerlink" title="3.2 写入值，要在组件中引入mapMutations的语法糖"></a>3.2 写入值，要在组件中引入mapMutations的语法糖</h3><p>####1. 引入语法糖<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;mapMutations, mapActions&#125; <span class="keyword">from</span> <span class="string">'vuex'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>####2. 在methods里面mapMutations 辅助函数将组件中的 methods 映射为 store.commit 调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...mapMutations(&#123;</span><br><span class="line">  <span class="comment">// 这里和mutation里面的常量做一个映射</span></span><br><span class="line">  setCity: <span class="string">'SET_CITY'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>####3. 在需要的地方写入值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.setCity(city);</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-3获取值"><a href="#3-3获取值" class="headerlink" title="3.3获取值"></a>3.3获取值</h3><p>获得vuex中的值，要在组件中引入mapGetters（mapGetters 辅助函数仅仅是将 store 中的 getters 映射到局部计算属性）</p>
+<p>####1.引入mapGetters</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;mapGetters&#125; <span class="keyword">from</span> <span class="string">'vuex'</span>;</span><br></pre></td></tr></table></figure>
+<p>####2.在computed计算属性里面使用对象展开运算符将 getters 混入 computed 对象中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    <span class="comment">// 这里面的city映射的是state.js里面的city</span></span><br><span class="line">    <span class="comment">// 可以映射多个值</span></span><br><span class="line">    ...mapGetters([</span><br><span class="line">      <span class="string">'city'</span>,</span><br><span class="line">      <span class="string">'cityList'</span>,</span><br><span class="line">      <span class="string">'palyer'</span>,</span><br><span class="line">      <span class="string">'fullScreen'</span></span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>####3.拿到值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.city);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.cityList[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.palyer);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullScreen);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-4-action存入值"><a href="#3-4-action存入值" class="headerlink" title="3.4 action存入值"></a>3.4 action存入值</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...mapActions([<span class="string">'selectList'</span>])</span><br></pre></td></tr></table></figure>
+<p>在需要存入的地方使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.selectList(&#123;</span><br><span class="line">  list: <span class="keyword">this</span>.citys,</span><br><span class="line">  index: <span class="number">1</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -401,8 +456,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -417,7 +481,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -428,7 +492,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -453,6 +517,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-目录的配置"><span class="nav-number">1.</span> <span class="nav-text">一 目录的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-创建store里面的文件"><span class="nav-number">2.</span> <span class="nav-text">二 创建store里面的文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-state-js"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 state.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-mutations-types-js-存取mutations相关的字符常量-一些常量"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 mutations-types.js  存取mutations相关的字符常量 (一些常量)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-mutations-js-（定义修改的操作）"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 mutations.js （定义修改的操作）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-getters-js-有时候我们需要从-store-中的-state-中派生出一些状态。"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 getters.js 有时候我们需要从 store 中的 state 中派生出一些状态。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-actions-js"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 actions.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-index-js入口"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 index.js入口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-使用"><span class="nav-number">3.</span> <span class="nav-text">三 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-在mian-js注册store"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 在mian.js注册store</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-写入值，要在组件中引入mapMutations的语法糖"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 写入值，要在组件中引入mapMutations的语法糖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3获取值"><span class="nav-number">3.3.</span> <span class="nav-text">3.3获取值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-action存入值"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 action存入值</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
