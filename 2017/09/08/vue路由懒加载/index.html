@@ -190,16 +190,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
@@ -216,6 +206,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -353,7 +353,7 @@
 <p>==注意==  上面的@代表当前src目录，具体可以去参考webpack的配置</p>
 <p>webpack.base.conf.js里面添加 chunkFilename: ‘[name].js’<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  path: config.build.assetsRoot,</span><br><span class="line">  filename: <span class="string">'[name].js'</span>,</span><br><span class="line">  <span class="comment">// 需要配置的地方</span></span><br><span class="line">  chunkFilename: <span class="string">'[name].js'</span>,</span><br><span class="line">  publicPath: process.env.NODE_ENV === <span class="string">'production'</span></span><br><span class="line">    ? config.build.assetsPublicPath</span><br><span class="line">    : config.dev.assetsPublicPath</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>创建了home和todos两个组件使用了路由懒加载，配置好之后我们执行npm run dev来运行项目，打开network之后刷新一下，我们会发现加载了home.js，我们会发现和上面定义的webpackChunkName名字一样，同时点todos会加载todo.js。这就是路由懒加载的简单使用。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>在main.js里面项目的入口我们可以使用template的语法，也可以使用render函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  * 这里使用的template的语法</span></span><br><span class="line"><span class="comment">  * 也可以使用render函数,直接return一个html结构</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="comment">// template: '&lt;App/&gt;'</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;App&gt;<span class="xml"><span class="tag">&lt;/<span class="name">App</span>&gt;</span></span></span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  </span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>在main.js里面项目的入口我们可以使用template的语法，也可以使用render函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  * 这里使用的template的语法</span></span><br><span class="line"><span class="comment">  * 也可以使用render函数,直接return一个html结构</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="comment">// template: '&lt;App/&gt;'</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;App&gt;&lt;/App&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  </span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -477,10 +477,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
