@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodeJS">
+<meta property="og:url" content="http://yoursite.com/2018/08/22/nodeJS/index.html">
+<meta property="og:site_name" content="bzy的博客">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/white-ling-3598577_640.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/node/WX20180809-202214%402x.png">
+<meta property="og:updated_time" content="2018-08-22T14:14:04.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodeJS">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/white-ling-3598577_640.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/22/nodeJS/"/>
+
+
+
+
+
+  <title>nodeJS | bzy的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bzy的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/22/nodeJS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bzy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bzy的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nodeJS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T21:33:56+08:00">
+                2018-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodeJS/" itemprop="url" rel="index">
+                    <span itemprop="name">nodeJS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/white-ling-3598577_640.jpg" alt="image"><br><a id="more"></a></p>
+<p>nodeJS学习，<a href="http://nodejs.cn/" target="_blank" rel="noopener">中文网</a></p>
+<h2 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h2><ul>
+<li>每个文件是一个模块，有自己的作用域</li>
+<li>在模块内部的module变量代表模块本身</li>
+<li>module.exports属性代表模块对外的接口<br>示例<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.js</span></span><br><span class="line"><span class="keyword">const</span> value = <span class="number">100</span></span><br><span class="line">test = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports.value = value</span><br><span class="line"><span class="built_in">module</span>.exports.testFn = test</span><br><span class="line"><span class="comment">// require.js</span></span><br><span class="line"><span class="comment">// 引入test模块</span></span><br><span class="line"><span class="keyword">const</span> test = <span class="built_in">require</span>(<span class="string">'./test.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(test.value)  <span class="comment">// 100</span></span><br><span class="line">test.testFn() <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="require特性"><a href="#require特性" class="headerlink" title="require特性"></a>require特性</h2><ul>
+<li>module被加载的时候执行，加载后缓存（也就是第一次加载后会缓存起来）<br>exports是module.exports的快捷方式，默认<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> exports = <span class="built_in">module</span>.exports</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>但是exports修改指向后就不再指向modul.exports</p>
+<h2 id="global-全局对象"><a href="#global-全局对象" class="headerlink" title="global(全局对象)"></a>global(全局对象)</h2><p>我们可以像使用window一样把一些属相绑定到global上面</p>
+<ul>
+<li>CommonJS</li>
+<li>buffer process console</li>
+<li>timer<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// moduleA.js</span></span><br><span class="line">global.personName = <span class="string">'xxxx'</span></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="built_in">console</span>.log(personName)   <span class="comment">// xxxx</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="调试工具-inspect"><a href="#调试工具-inspect" class="headerlink" title="调试工具 inspect"></a>调试工具 inspect</h2><p><a href="https://nodejs.org/en/docs/guides/debugging-getting-started/" target="_blank" rel="noopener">链接</a><br>Chrome DevTools 55+</p>
+<ul>
+<li>Option 1: Open chrome://inspect in a Chromium-based browser. Click the Configure button and ensure your target host and port are listed.</li>
+<li>Option 2: Copy the devtoolsFrontendUrl from the output of /json/list (see above) or the –inspect hint text and paste into Chrome.</li>
+<li>Option 3: Install the Chrome Extension NIM (Node Inspector Manager):<a href="https://chrome.google.com/webstore/detail/nim-node-inspector-manage/gnhhdgbaldcilmgcpfddgdbkhjohddkj" target="_blank" rel="noopener">https://chrome.google.com/webstore/detail/nim-node-inspector-manage/gnhhdgbaldcilmgcpfddgdbkhjohddkj</a><br>操作</li>
+<li>打开Chrome输入：chrome://inspect/#devices</li>
+<li>执行 node –inspect-brk debug.js<br>将自动跳转到调试页面<br><img src="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/node/WX20180809-202214%402x.png" alt="image"></li>
+</ul>
+<h2 id="process-进程"><a href="#process-进程" class="headerlink" title="process - 进程"></a>process - 进程</h2><p>process 对象是一个全局变量，它提供当前 Node.js 进程的有关信息，以及控制当前 Node.js 进程。 因为是全局变量，所以无需使用 require()。</p>
+<h3 id="argv"><a href="#argv" class="headerlink" title="argv"></a>argv</h3><p>argv属性返回一个数组，这个数组包含了启动Node.js进程时的命令行参数。默认情况下返回两个元素，第一个是node安装的路径，第二个是当前执行文件的路径。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;argv&#125; = process;</span><br><span class="line"><span class="comment">// argv是一个数组</span></span><br><span class="line">argv.forEach(<span class="function"><span class="params">item</span> =&gt;</span> <span class="built_in">console</span>.log(item))</span><br></pre></td></tr></table></figure></p>
+<p>打印结果<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/node</span><br><span class="line">/Users/zhenyu/Desktop/node/node-demo/node-demo/process1.js</span><br></pre></td></tr></table></figure></p>
+<p>argv还可以获取执行node命令后面所加的参数<br>执行这条命令，还是上面的程序<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node process1.js test name=1</span><br></pre></td></tr></table></figure></p>
+<p>打印结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/node</span><br><span class="line">/Users/zhenyu/Desktop/node/node-demo/node-demo/process1.js</span><br><span class="line">test</span><br><span class="line">name=1</span><br></pre></td></tr></table></figure></p>
+<h3 id="argv0"><a href="#argv0" class="headerlink" title="argv0"></a>argv0</h3><p>和argv的第一个参数一样<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;argv0&#125; = process;</span><br><span class="line"><span class="built_in">console</span>.log(argv0)   <span class="comment">// /usr/local/bin/node</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="execArgv"><a href="#execArgv" class="headerlink" title="execArgv"></a>execArgv</h3><p>在文件和node命令之前写一些参数，这些选项在process.argv属性返回的数组中不会出现<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;execArgv&#125; = process;</span><br><span class="line"><span class="built_in">console</span>.log(execArgv)   <span class="comment">// 	[ '--inspect' ]</span></span><br></pre></td></tr></table></figure></p>
+<p>而同样命令argv的结果是<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/node</span><br><span class="line">/Users/zhenyu/Desktop/node/node-demo/node-demo/process1.js</span><br><span class="line">test</span><br><span class="line">name=1</span><br></pre></td></tr></table></figure></p>
+<h3 id="execPath"><a href="#execPath" class="headerlink" title="execPath"></a>execPath</h3><p>Node.js进程的可执行文件所在的绝对路径，也就是argv的第一个参数。console打印结果：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/node</span><br></pre></td></tr></table></figure></p>
+<h3 id="env"><a href="#env" class="headerlink" title="env"></a>env</h3><p>返回一个包含用户环境信息的对象。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  TERM: 'xterm-256color',</span><br><span class="line">  SHELL: '/usr/local/bin/bash',</span><br><span class="line">  USER: 'maciej',</span><br><span class="line">  PATH: '~/.bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',</span><br><span class="line">  PWD: '/Users/maciej',</span><br><span class="line">  EDITOR: 'vim',</span><br><span class="line">  SHLVL: '1',</span><br><span class="line">  HOME: '/Users/maciej',</span><br><span class="line">  LOGNAME: 'maciej',</span><br><span class="line">  _: '/usr/local/bin/node'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h3><p>将 callback 添加到”next tick 队列”。 一旦当前事件轮询队列的任务全部完成，在next tick队列中的所有callbacks会被依次调用。<br>nextTick里面的回调会比setTimeout先执行<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'nextTick'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>打印结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">start</span><br><span class="line">end</span><br><span class="line">nextTick</span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
+<h2 id="path-路径"><a href="#path-路径" class="headerlink" title="path(路径)"></a>path(路径)</h2><h3 id="basename"><a href="#basename" class="headerlink" title="basename"></a>basename</h3><p>返回一个path的最后一部分<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;basename&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">let</span> filepath = <span class="string">'/usr/local/bin/no.txt'</span></span><br><span class="line"><span class="built_in">console</span>.log(basename(filepath))    <span class="comment">// no.txt</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="dirname"><a href="#dirname" class="headerlink" title="dirname"></a>dirname</h3><p>返回一个路径的目录名字<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;dirname&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">let</span> filepath = <span class="string">'/usr/local/bin/no.txt'</span></span><br><span class="line"><span class="built_in">console</span>.log(dirname(filepath))   <span class="comment">// /usr/local/bin</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="extname"><a href="#extname" class="headerlink" title="extname"></a>extname</h3><p>返回文件的扩展名<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;extname&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">let</span> filepath = <span class="string">'/usr/local/bin/no.txt'</span></span><br><span class="line"><span class="built_in">console</span>.log(extname(filepath))   <span class="comment">// .txt</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="normalize"><a href="#normalize" class="headerlink" title="normalize"></a>normalize</h3><p>会将有瑕疵或者有问题的路径转化为合理的路径<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;normalize&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(normalize(<span class="string">'/usr//local/bin'</span>))   <span class="comment">// /usr/local/bin</span></span><br><span class="line"><span class="built_in">console</span>.log(normalize(<span class="string">'/usr/local/../bin'</span>))  <span class="comment">// /usr/bin</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="join"><a href="#join" class="headerlink" title="join"></a>join</h3><p>拼接路径，同时也会处理有瑕疵的路径<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;join&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(join(<span class="string">'usr'</span>,<span class="string">'local'</span>, <span class="string">'bin/'</span>))   <span class="comment">// usr/local/bin/</span></span><br><span class="line"><span class="built_in">console</span>.log(join(<span class="string">'usr'</span>,<span class="string">'../local'</span>, <span class="string">'bin/'</span>))  <span class="comment">// local/bin/</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h3><p>把一个相对路基解析成绝对路径<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;resolve&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(resolve(<span class="string">'./'</span>))   <span class="comment">// /Users/zhenyu/Desktop/node/node-demo/node-demo</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="parse"><a href="#parse" class="headerlink" title="parse"></a>parse</h3><p>可以帮助我们分析一个路径，format的操作和parse相反<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;parse&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">let</span> filepath = <span class="string">'/usr/local/bin/no.txt'</span></span><br><span class="line"><span class="built_in">console</span>.log(parse(filepath))</span><br></pre></td></tr></table></figure></p>
+<p>打印结果<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="attr">root</span>: <span class="string">'/'</span>,</span><br><span class="line">  dir: <span class="string">'/usr/local/bin'</span>,</span><br><span class="line">  base: <span class="string">'no.txt'</span>,</span><br><span class="line">  ext: <span class="string">'.txt'</span>,</span><br><span class="line">  name: <span class="string">'no'</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="format"><a href="#format" class="headerlink" title="format"></a>format</h3><p>format的操作和parse的功能相反<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;parse, format&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">let</span> filepath = <span class="string">'/usr/local/bin/no.txt'</span></span><br><span class="line"><span class="keyword">let</span> re = parse(filepath)</span><br><span class="line"><span class="comment">/*  re的值</span></span><br><span class="line"><span class="comment">&#123; root: '/',</span></span><br><span class="line"><span class="comment">  dir: '/usr/local/bin',</span></span><br><span class="line"><span class="comment">  base: 'no.txt',</span></span><br><span class="line"><span class="comment">  ext: '.txt',</span></span><br><span class="line"><span class="comment">  name: 'no' &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">console</span>.log(format(re))  <span class="comment">// /usr/local/bin/no.txt</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="系统相关-sep-delimiter-win32-posix"><a href="#系统相关-sep-delimiter-win32-posix" class="headerlink" title="系统相关 sep, delimiter, win32, posix"></a>系统相关 sep, delimiter, win32, posix</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;sep, delimiter, win32, posix&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="comment">// sep 平台特定的路径片段分隔符：win是\ ,POSIX 上是 /</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'sep'</span>, sep)    <span class="comment">// sep /</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'win sep'</span>, win32.sep)   <span class="comment">// win sep \</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'PATH'</span>, process.env.PATH)  <span class="comment">// PATH /Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local</span></span><br><span class="line"><span class="comment">// 平台特定的路径分隔符：win是; ,POSIX 上是:</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'delimiter'</span>, delimiter)  <span class="comment">// delimiter :</span></span><br></pre></td></tr></table></figure>
+<h3 id="有关路径的总结一"><a href="#有关路径的总结一" class="headerlink" title="有关路径的总结一"></a>有关路径的总结一</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="comment">// __dirname 当前模块的文件夹名称</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'__dirname:'</span>, __dirname)</span><br><span class="line"><span class="comment">// process.cwd: 返回 Node.js 进程当前工作的目录。</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'process.cwd:'</span>, process.cwd())</span><br><span class="line"><span class="comment">// path.resolve 把一个相对路基解析成绝对路径</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'./:'</span>, path.resolve(<span class="string">'./'</span>))</span><br></pre></td></tr></table></figure>
+<p>执行node path输出结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__dirname: /Users/zhenyu/Desktop/node/node-demo/node-demo</span><br><span class="line">process.cwd: /Users/zhenyu/Desktop/node/node-demo/node-demo</span><br><span class="line">./: /Users/zhenyu/Desktop/node/node-demo/node-demo</span><br></pre></td></tr></table></figure></p>
+<p>执行node node node-demo/path<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__dirname: /Users/zhenyu/Desktop/node/node-demo/node-demo</span><br><span class="line">process.cwd: /Users/zhenyu/Desktop/node/node-demo</span><br><span class="line">./: /Users/zhenyu/Desktop/node/node-demo</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>dirnam和filename总是返回文件的绝对路径</li>
+<li>process.cwd: 返回执行Node所在的文件夹</li>
+<li>./ 在require中总是相对当前文件所在的文件夹<h2 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h2>Buffer用来处理二进制数据流<br>实例类似整数数组，但是大小是固定的，创建后无法被调整<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个长度为 10、且用 0 填充的 Buffer。</span></span><br><span class="line"><span class="keyword">const</span> buf1 = Buffer.alloc(<span class="number">10</span>);   <span class="comment">// &lt;Buffer 00 00 00 00 00 00 00 00 00 00&gt;</span></span><br><span class="line"><span class="comment">// 创建一个长度为 10、且用 0x1 填充的 Buffer。 </span></span><br><span class="line"><span class="keyword">const</span> buf2 = Buffer.alloc(<span class="number">10</span>, <span class="number">1</span>);   <span class="comment">// &lt;Buffer 01 01 01 01 01 01 01 01 01 01&gt;</span></span><br><span class="line"><span class="comment">// 创建一个不安全的Buffer(里面的数据很随机)</span></span><br><span class="line"><span class="keyword">const</span> buf3 = Buffer.allocUnsafe(<span class="number">10</span>);   <span class="comment">// &lt;Buffer 00 00 00 00 00 00 00 00 20 00&gt;</span></span><br><span class="line"><span class="comment">// 创建一个包含 [0x1, 0x2, 0x3] 的 Buffer。</span></span><br><span class="line"><span class="keyword">const</span> buf4 = Buffer.from([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);   <span class="comment">// &lt;Buffer 01 02 03&gt;</span></span><br><span class="line"><span class="comment">// 创建一个包含 Latin-1 字节 [0x74, 0xe9, 0x73, 0x74] 的 Buffer。</span></span><br><span class="line"><span class="keyword">const</span> buf6 = Buffer.from(<span class="string">'tést'</span>, <span class="string">'latin1'</span>);   <span class="comment">//&lt;Buffer 74 e9 73 74&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="byteLength"><a href="#byteLength" class="headerlink" title="byteLength"></a>byteLength</h3><p>返回一个字符串的实际字节长度。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回一个字符串的实际字节长度。</span></span><br><span class="line">Buffer.byteLength(<span class="string">'test'</span>)   <span class="comment">// 4</span></span><br><span class="line">Buffer.byteLength(<span class="string">'测试'</span>)   <span class="comment">// 6</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="isBuffer"><a href="#isBuffer" class="headerlink" title="isBuffer"></a>isBuffer</h3><p>判断一个对象是不是Buffer对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断一个对象是不是Buffer对象</span></span><br><span class="line">Buffer.isBuffer(&#123;&#125;)  <span class="comment">// false</span></span><br><span class="line">Buffer.isBuffer(Buffer.from([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]))  <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h3><p>拼接Buffer</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf1 = Buffer.from(<span class="string">'hello '</span>)</span><br><span class="line"><span class="keyword">const</span> buf2 = Buffer.from(<span class="string">'word'</span>)</span><br><span class="line"><span class="keyword">const</span> newbuf = Buffer.concat([buf1, buf2])</span><br><span class="line"><span class="built_in">console</span>.log(newbuf.toString())  <span class="comment">// hello word</span></span><br></pre></td></tr></table></figure>
+<h3 id="length"><a href="#length" class="headerlink" title="length"></a>length</h3><p>返回buffer的长度<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// length</span></span><br><span class="line"><span class="keyword">const</span> buf1 = Buffer.from(<span class="string">'hello word'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(buf1.length)  <span class="comment">// 10</span></span><br><span class="line"><span class="comment">// buffer的长度是固定的，不可改变的</span></span><br><span class="line"><span class="keyword">const</span> buf2 = Buffer.alloc(<span class="number">10</span>)</span><br><span class="line">buf2[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"><span class="built_in">console</span>.log(buf2.length)  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h3><p>根据 encoding 指定的字符编码解码 buf 成一个字符串<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// string</span></span><br><span class="line"><span class="keyword">const</span> buf = Buffer.from(<span class="string">'你好'</span>)</span><br><span class="line"><span class="comment">// utf8</span></span><br><span class="line"><span class="built_in">console</span>.log(buf.toString())  <span class="comment">// 你好</span></span><br><span class="line"><span class="comment">// base64</span></span><br><span class="line"><span class="built_in">console</span>.log(buf.toString(<span class="string">'base64'</span>))  <span class="comment">// 5L2g5aW9</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="fill"><a href="#fill" class="headerlink" title="fill"></a>fill</h3><p>接受四个参数</p>
+<ul>
+<li>value 用来填充 buf 的值。</li>
+<li>offset 起始位置</li>
+<li>end 结束为止</li>
+<li>encoding 如果 value 是一个字符串，则这是它的字符编码。默认: ‘utf8’。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> b = Buffer.allocUnsafe(<span class="number">50</span>).fill(<span class="string">'h'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(b)  <span class="comment">// &lt;Buffer 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(b.toString())  <span class="comment">// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h3><p>判断，如果具有完全相同的字节，则返回 true，否则返回 false。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf1 = Buffer.from(<span class="string">'ABC'</span>);</span><br><span class="line"><span class="keyword">const</span> buf2 = Buffer.from(<span class="string">'414243'</span>, <span class="string">'hex'</span>);</span><br><span class="line"><span class="keyword">const</span> buf3 = Buffer.from(<span class="string">'ABCD'</span>);</span><br><span class="line"><span class="comment">// 输出: true</span></span><br><span class="line"><span class="built_in">console</span>.log(buf1.equals(buf2));</span><br><span class="line"><span class="comment">// 输出: false</span></span><br><span class="line"><span class="built_in">console</span>.log(buf1.equals(buf3));</span><br></pre></td></tr></table></figure></p>
+<h3 id="indexof"><a href="#indexof" class="headerlink" title="indexof"></a>indexof</h3><p>这和数组的api差不多，同时也具有lastIndexOf这些原生api</p>
+<h2 id="events-事件"><a href="#events-事件" class="headerlink" title="events (事件)"></a>events (事件)</h2><p>一个events事件触发的三个条件</p>
+<ul>
+<li>继承EventEmitter 类的实例，创建事件对象</li>
+<li>用eventEmitter.on() 方法注册监听器</li>
+<li>用eventEmitter.emit() 方法触发事件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyEmitter</span> <span class="keyword">extends</span> <span class="title">EventEmitter</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> myEm = <span class="keyword">new</span> MyEmitter()</span><br><span class="line">myEm.on(<span class="string">'test'</span>, () =&gt; <span class="built_in">console</span>.log(<span class="string">'test'</span>))</span><br><span class="line">myEm.emit(<span class="string">'test'</span>)</span><br><span class="line"><span class="comment">// 打印 test</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="只处理事件一次"><a href="#只处理事件一次" class="headerlink" title="只处理事件一次"></a>只处理事件一次</h3><p>使用EventEmitter.once来注册事件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyEmitter</span> <span class="keyword">extends</span> <span class="title">EventEmitter</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> myEm = <span class="keyword">new</span> MyEmitter()</span><br><span class="line">myEm.once(<span class="string">'test'</span>, () =&gt; <span class="built_in">console</span>.log(<span class="string">'test'</span>))</span><br><span class="line">setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  myEm.emit(<span class="string">'test'</span>)</span><br><span class="line">&#125;, <span class="number">500</span>)</span><br></pre></td></tr></table></figure></p>
+<p>在控制台发现只打印了一次test</p>
+<h3 id="移除事件"><a href="#移除事件" class="headerlink" title="移除事件"></a>移除事件</h3><p>EventEmitter.removeListener来移除某个事件<br>EventEmitter.removeAllListener 来移除所有事件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyEmitter</span> <span class="keyword">extends</span> <span class="title">EventEmitter</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> myEm = <span class="keyword">new</span> MyEmitter()</span><br><span class="line"><span class="keyword">let</span> fn1 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">'fn1'</span>)&#125;</span><br><span class="line"><span class="keyword">let</span> fn2 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">'fn2'</span>)&#125;</span><br><span class="line"><span class="keyword">let</span> fn3 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">'fn3'</span>)&#125;</span><br><span class="line">myEm.on(<span class="string">'test'</span>, fn1)</span><br><span class="line">myEm.on(<span class="string">'test'</span>, fn2)</span><br><span class="line">myEm.on(<span class="string">'test'</span>, fn3)</span><br><span class="line">setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  myEm.emit(<span class="string">'test'</span>)</span><br><span class="line">&#125;, <span class="number">100</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  myEm.removeListener(<span class="string">'test'</span>, fn1)</span><br><span class="line">&#125;, <span class="number">200</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  myEm.removeAllListeners(<span class="string">'test'</span>)</span><br><span class="line">&#125;, <span class="number">300</span>)</span><br></pre></td></tr></table></figure></p>
+<p>打印结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fn1</span><br><span class="line">fn2</span><br><span class="line">fn3</span><br><span class="line">// 在200毫秒的时候移除了fn1, 所以只打印了fn2，fn3</span><br><span class="line">fn2</span><br><span class="line">fn3</span><br><span class="line">// 300毫秒移除所有事件，什么也不打印</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/21/记录最近的心情/" rel="next" title="记录最近的心情">
+                <i class="fa fa-chevron-left"></i> 记录最近的心情
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">bzy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CommonJS"><span class="nav-number">1.</span> <span class="nav-text">CommonJS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#require特性"><span class="nav-number">2.</span> <span class="nav-text">require特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#global-全局对象"><span class="nav-number">3.</span> <span class="nav-text">global(全局对象)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试工具-inspect"><span class="nav-number">4.</span> <span class="nav-text">调试工具 inspect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#process-进程"><span class="nav-number">5.</span> <span class="nav-text">process - 进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#argv"><span class="nav-number">5.1.</span> <span class="nav-text">argv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#argv0"><span class="nav-number">5.2.</span> <span class="nav-text">argv0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#execArgv"><span class="nav-number">5.3.</span> <span class="nav-text">execArgv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#execPath"><span class="nav-number">5.4.</span> <span class="nav-text">execPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#env"><span class="nav-number">5.5.</span> <span class="nav-text">env</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nextTick"><span class="nav-number">5.6.</span> <span class="nav-text">nextTick</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path-路径"><span class="nav-number">6.</span> <span class="nav-text">path(路径)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#basename"><span class="nav-number">6.1.</span> <span class="nav-text">basename</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dirname"><span class="nav-number">6.2.</span> <span class="nav-text">dirname</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extname"><span class="nav-number">6.3.</span> <span class="nav-text">extname</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#normalize"><span class="nav-number">6.4.</span> <span class="nav-text">normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join"><span class="nav-number">6.5.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resolve"><span class="nav-number">6.6.</span> <span class="nav-text">resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parse"><span class="nav-number">6.7.</span> <span class="nav-text">parse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#format"><span class="nav-number">6.8.</span> <span class="nav-text">format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统相关-sep-delimiter-win32-posix"><span class="nav-number">6.9.</span> <span class="nav-text">系统相关 sep, delimiter, win32, posix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有关路径的总结一"><span class="nav-number">6.10.</span> <span class="nav-text">有关路径的总结一</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffer"><span class="nav-number">7.</span> <span class="nav-text">Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#byteLength"><span class="nav-number">7.1.</span> <span class="nav-text">byteLength</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isBuffer"><span class="nav-number">7.2.</span> <span class="nav-text">isBuffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#concat"><span class="nav-number">7.3.</span> <span class="nav-text">concat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#length"><span class="nav-number">7.4.</span> <span class="nav-text">length</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toString-NaN"><span class="nav-number">7.5.</span> <span class="nav-text">toString</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fill"><span class="nav-number">7.6.</span> <span class="nav-text">fill</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">7.7.</span> <span class="nav-text">equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#indexof"><span class="nav-number">7.8.</span> <span class="nav-text">indexof</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#events-事件"><span class="nav-number">8.</span> <span class="nav-text">events (事件)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#只处理事件一次"><span class="nav-number">8.1.</span> <span class="nav-text">只处理事件一次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移除事件"><span class="nav-number">8.2.</span> <span class="nav-text">移除事件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bzy</span>
+
+  
+</div>
+<!--
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+ -->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
