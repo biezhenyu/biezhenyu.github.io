@@ -85,11 +85,11 @@
 <meta property="og:url" content="http://yoursite.com/2018/06/05/Typescript/index.html">
 <meta property="og:site_name" content="bzy的博客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/1.jpeg">
-<meta property="og:updated_time" content="2018-08-22T01:10:08.739Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/cathedral-3599450_640.jpg">
+<meta property="og:updated_time" content="2018-08-22T01:29:11.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Typescript">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/1.jpeg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/cathedral-3599450_640.jpg">
 
 
 
@@ -341,7 +341,7 @@
       
 
       
-        <p><img src="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/1.jpeg" alt="image"><br><a id="more"></a></p>
+        <p><img src="https://raw.githubusercontent.com/biezhenyu/myimages/master/images/other/cathedral-3599450_640.jpg" alt="image"><br><a id="more"></a></p>
 <h2 id="由于使用angular6的技术站进行前端开发，angular是使用Typescript进行开发的，由于水平有限，看起来Typescript文档有点生涩，所以做了一部分的笔记。"><a href="#由于使用angular6的技术站进行前端开发，angular是使用Typescript进行开发的，由于水平有限，看起来Typescript文档有点生涩，所以做了一部分的笔记。" class="headerlink" title="由于使用angular6的技术站进行前端开发，angular是使用Typescript进行开发的，由于水平有限，看起来Typescript文档有点生涩，所以做了一部分的笔记。"></a>由于使用angular6的技术站进行前端开发，angular是使用Typescript进行开发的，由于水平有限，看起来Typescript文档有点生涩，所以做了一部分的笔记。</h2><h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// boolean</span></span><br><span class="line"><span class="keyword">let</span> bool: <span class="built_in">boolean</span> = <span class="literal">false</span></span><br><span class="line"><span class="comment">// number</span></span><br><span class="line"><span class="keyword">let</span> num: <span class="built_in">number</span> = <span class="number">6</span></span><br><span class="line"><span class="comment">// string</span></span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">string</span> = <span class="string">'zhangsan'</span></span><br><span class="line"><span class="comment">// array</span></span><br><span class="line"><span class="keyword">let</span> list: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment">// 数组泛型</span></span><br><span class="line"><span class="keyword">let</span> list2: <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt; = [<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]</span><br><span class="line"><span class="comment">// tulp元组(定义数组的数量以及数组中类型的数组, 数组中内容的顺序必须和类型的顺序保持一致)</span></span><br><span class="line"><span class="keyword">let</span> tulpList: [<span class="built_in">string</span>, <span class="built_in">number</span>] = [<span class="string">'1'</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// tulpList[2] 会使用联合类型 tulpList[2]: string | number</span></span><br></pre></td></tr></table></figure>
 <h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><ul>
 <li>使用枚举我们可以定义一些带名字的常量。 使用枚举可以清晰地表达意图或创建一组有区别的用例。 TypeScript支持数字的和基于字符串的枚举。</li>
