@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 步骤  发起HTTP请求获取网页内容 使用类似的jQuery的语法来操作网页提取需要的数据 把数据保存到数据库中以供查询 建立一个服务器来显示这些数据 可以定时爬取数据 让程序稳定运行 对编码进行转换  2.核心库 2.1 请求 npm请求 github请求  2.1.1 安装1npm install --save request 2.1.1.1 get请求123456const reque">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬取掘金数据">
+<meta property="og:url" content="http://yoursite.com/2018/12/07/爬取掘金数据/index.html">
+<meta property="og:site_name" content="bzy的博客">
+<meta property="og:description" content="1. 步骤  发起HTTP请求获取网页内容 使用类似的jQuery的语法来操作网页提取需要的数据 把数据保存到数据库中以供查询 建立一个服务器来显示这些数据 可以定时爬取数据 让程序稳定运行 对编码进行转换  2.核心库 2.1 请求 npm请求 github请求  2.1.1 安装1npm install --save request 2.1.1.1 get请求123456const reque">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-08T08:08:55.723Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬取掘金数据">
+<meta name="twitter:description" content="1. 步骤  发起HTTP请求获取网页内容 使用类似的jQuery的语法来操作网页提取需要的数据 把数据保存到数据库中以供查询 建立一个服务器来显示这些数据 可以定时爬取数据 让程序稳定运行 对编码进行转换  2.核心库 2.1 请求 npm请求 github请求  2.1.1 安装1npm install --save request 2.1.1.1 get请求123456const reque">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/07/爬取掘金数据/"/>
+
+
+
+
+
+  <title>爬取掘金数据 | bzy的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bzy的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/07/爬取掘金数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bzy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bzy的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬取掘金数据</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T22:11:22+08:00">
+                2018-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodejs/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-步骤"><a href="#1-步骤" class="headerlink" title="1. 步骤"></a>1. 步骤</h3><hr>
+<ol>
+<li>发起HTTP请求获取网页内容</li>
+<li>使用类似的jQuery的语法来操作网页提取需要的数据</li>
+<li>把数据保存到数据库中以供查询</li>
+<li>建立一个服务器来显示这些数据</li>
+<li>可以定时爬取数据</li>
+<li>让程序稳定运行</li>
+<li>对编码进行转换</li>
+</ol>
+<h3 id="2-核心库"><a href="#2-核心库" class="headerlink" title="2.核心库"></a>2.核心库</h3><hr>
+<h4 id="2-1-请求"><a href="#2-1-请求" class="headerlink" title="2.1 请求"></a>2.1 请求</h4><ul>
+<li>npm请求</li>
+<li>github请求</li>
+</ul>
+<h5 id="2-1-1-安装"><a href="#2-1-1-安装" class="headerlink" title="2.1.1 安装"></a>2.1.1 安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save request</span><br></pre></td></tr></table></figure>
+<h5 id="2-1-1-1-get请求"><a href="#2-1-1-1-get请求" class="headerlink" title="2.1.1.1 get请求"></a>2.1.1.1 get请求</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line">request(<span class="string">'https://juejin.im/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!error &amp;&amp; response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(body)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="2-1-1-2-post请求"><a href="#2-1-1-2-post请求" class="headerlink" title="2.1.1.2 post请求"></a>2.1.1.2 post请求</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options=&#123;</span><br><span class="line">  url: <span class="string">'http://localhost:8080/signup'</span>,</span><br><span class="line">  method:<span class="string">'POST'</span>,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 请求体是对象的话，要加这个</span></span><br><span class="line">  json: <span class="literal">true</span>,</span><br><span class="line">  headers: &#123;</span><br><span class="line">      <span class="string">"Content-Type"</span>:<span class="string">"application/json"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  body: &#123;<span class="attr">name</span>:<span class="string">"bzy"</span>,<span class="attr">age</span>:<span class="number">8</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">request(options,<span class="function"><span class="keyword">function</span> (<span class="params">error,response,body</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!error &amp;&amp; response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(body);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="2-1-1-3-post应用程序-x-www-form-urlencoded"><a href="#2-1-1-3-post应用程序-x-www-form-urlencoded" class="headerlink" title="2.1.1.3 post应用程序/ x-www-form-urlencoded"></a>2.1.1.3 post应用程序/ x-www-form-urlencoded</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request=<span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"><span class="keyword">const</span> options=&#123;</span><br><span class="line">    url: <span class="string">'http://localhost:8080/form'</span>,</span><br><span class="line">    method:<span class="string">'POST'</span>,</span><br><span class="line">    json: <span class="literal">true</span>,</span><br><span class="line">    form:&#123;<span class="attr">name</span>:<span class="string">'bzy'</span>,<span class="attr">age</span>:<span class="number">10</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">request(options,<span class="function"><span class="keyword">function</span> (<span class="params">error,response,body</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!error &amp;&amp; response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(body);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="2-1-1-4-post-multipart-form-data"><a href="#2-1-1-4-post-multipart-form-data" class="headerlink" title="2.1.1.4 post multipart / form-data"></a>2.1.1.4 post multipart / form-data</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request=<span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"><span class="keyword">const</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> formData = &#123;</span><br><span class="line">    name: <span class="string">'bzy'</span>,</span><br><span class="line">    avatar:&#123;</span><br><span class="line">      value:  fs.createReadStream(<span class="string">'avatar.jpg'</span>),</span><br><span class="line">      options: &#123;</span><br><span class="line">        filename: <span class="string">'avatar.jpg'</span>,</span><br><span class="line">        contentType: <span class="string">'image/jpeg'</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">request.post(&#123;<span class="attr">url</span>:<span class="string">'http://localhost:8080/upload'</span>, formData&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (!error&amp;&amp;response.statusCode==<span class="number">200</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(body);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-cheerio"><a href="#2-2-cheerio" class="headerlink" title="2.2 cheerio"></a>2.2 cheerio</h4><p>cheerio是一个节点的库，可以理解为一个Node.js的版本的jquery的，使用方式和jquery的基本相同。</p>
+<h5 id="2-2-1-安装"><a href="#2-2-1-安装" class="headerlink" title="2.2.1 安装"></a>2.2.1 安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cheerio</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-2-使用"><a href="#2-2-2-使用" class="headerlink" title="2.2.2 使用"></a>2.2.2 使用</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str=<span class="string">`</span></span><br><span class="line"><span class="string">&lt;h2 class="title"&gt;Hello world&lt;/h2&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"><span class="keyword">const</span> cheerio=<span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"><span class="keyword">const</span> $=cheerio.load(str);</span><br><span class="line">$(<span class="string">'h2.title'</span>).text(<span class="string">'hello there!'</span>);</span><br><span class="line">$(<span class="string">'h2'</span>).addClass(<span class="string">'welcome'</span>);</span><br><span class="line"><span class="built_in">console</span>.log($.html());</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-mysql"><a href="#2-3-mysql" class="headerlink" title="2.3 mysql"></a>2.3 mysql</h4><h5 id="2-3-1-安装"><a href="#2-3-1-安装" class="headerlink" title="2.3.1 安装"></a>2.3.1 安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i mysql</span><br></pre></td></tr></table></figure>
+<h5 id="2-3-2-连接"><a href="#2-3-2-连接" class="headerlink" title="2.3.2 连接"></a>2.3.2 连接</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> connection = mysql.createConnection(&#123;</span><br><span class="line">  host: <span class="string">'localhost'</span>,</span><br><span class="line">  user: <span class="string">'root'</span>,</span><br><span class="line">  password: <span class="string">'199407'</span>,</span><br><span class="line">  database: <span class="string">'crawler'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接</span></span><br><span class="line">connection.connect()</span><br><span class="line"></span><br><span class="line"><span class="comment">// query执行sql语句的意思，并非仅仅用来查询</span></span><br><span class="line">connection.query(<span class="string">`SELECT 1+1`</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error)</span><br><span class="line">  <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="2-3-3-插入"><a href="#2-3-3-插入" class="headerlink" title="2.3.3 插入"></a>2.3.3 插入</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="string">`INSERT INTO student(id, name) VALUES(1, 'bzy')`</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error)</span><br><span class="line">  <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="2-3-4-更新数据"><a href="#2-3-4-更新数据" class="headerlink" title="2.3.4 更新数据"></a>2.3.4 更新数据</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="string">`UPDATE student SET name = 'bzy1' WHERE id=1`</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error)</span><br><span class="line">  <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="2-3-5-删除数据"><a href="#2-3-5-删除数据" class="headerlink" title="2.3.5 删除数据"></a>2.3.5 删除数据</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="string">`DELETE FROM student WHERE id=1`</span>, (error, result) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error)</span><br><span class="line">  <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="2-3-5-重连"><a href="#2-3-5-重连" class="headerlink" title="2.3.5 重连"></a>2.3.5 重连</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  host: <span class="string">'localhost'</span>,</span><br><span class="line">  user: <span class="string">'root'</span>,</span><br><span class="line">  password: <span class="string">'199407'</span>,</span><br><span class="line">  database: <span class="string">'crawler'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> connection = mysql.createConnection(options)</span><br><span class="line">  connection.connect(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`连接出错 <span class="subst">$&#123;err&#125;</span>`</span>)</span><br><span class="line">      <span class="comment">// 重新连接</span></span><br><span class="line">      setTimeout(connect, <span class="number">2000</span>)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    connection.on(<span class="string">'err'</span>, (err) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (err.code == <span class="string">'PROTOCAL_CONNECTION_LOST'</span>) &#123;</span><br><span class="line">        connect()</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> err</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">connect()</span><br></pre></td></tr></table></figure>
+<h4 id="2-4-调试插件"><a href="#2-4-调试插件" class="headerlink" title="2.4 调试插件"></a>2.4 调试插件</h4><p>但是在程序运行过程中又不需要这些信息，为了方便切换而且不需要改代码，可以使用调试模<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> debug = <span class="built_in">require</span>(<span class="string">'debug'</span>)(<span class="string">'app:main'</span>);</span><br><span class="line">debug(<span class="string">'现在的时间是%s'</span>,<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>窗口系统在命令行中执行 SET DEBUG=app:*</li>
+<li>Mac的系统在命令行中执行 export DEBUG=app:*</li>
+</ul>
+<h4 id="2-5-编码（iconv-lite）"><a href="#2-5-编码（iconv-lite）" class="headerlink" title="2.5 编码（iconv-lite）"></a>2.5 编码（iconv-lite）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"><span class="comment">// 转码</span></span><br><span class="line"><span class="keyword">var</span> iconv=<span class="built_in">require</span>(<span class="string">'iconv-lite'</span>);</span><br><span class="line"><span class="comment">// 服务端jQuery</span></span><br><span class="line"><span class="keyword">let</span> cheerio=<span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// encoding: null 告诉request不要转码</span></span><br><span class="line">request(&#123;<span class="attr">url</span>: <span class="string">'http://top.baidu.com/buzz?b=26&amp;c=1&amp;fr=topcategory_c1'</span></span><br><span class="line">, <span class="attr">encoding</span>: <span class="literal">null</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err,response,body</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)</span><br><span class="line">        <span class="built_in">console</span>.error(err);</span><br><span class="line">    body = iconv.decode(body, <span class="string">'gbk'</span>).toString();</span><br><span class="line">    <span class="keyword">let</span> $=cheerio.load(body);</span><br><span class="line">    <span class="keyword">let</span> movies=[];</span><br><span class="line">    $(<span class="string">'.keyword .list-title'</span>).each(<span class="function">(<span class="params">index,item</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> movie=$(item);</span><br><span class="line">        movies.push(&#123;</span><br><span class="line">            name:movie.text()</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">console</span>.log(movies);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="3-1-爬取数据"><a href="#3-1-爬取数据" class="headerlink" title="3.1 爬取数据"></a>3.1 爬取数据</h3><h4 id="3-1-1-标签数据"><a href="#3-1-1-标签数据" class="headerlink" title="3.1.1 标签数据"></a>3.1.1 标签数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">const request = require(&apos;request-promise&apos;);</span><br><span class="line">const cheerio = require(&apos;cheerio&apos;);</span><br><span class="line"></span><br><span class="line">// 获取标签列表</span><br><span class="line">exports.tags = async function (url) &#123;</span><br><span class="line">  let options = &#123;</span><br><span class="line">    url,</span><br><span class="line">    transform(body) &#123;</span><br><span class="line">      return cheerio.load(body); //转成jQuery对象 $</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return request(options).then($ =&gt; &#123;</span><br><span class="line">    let infos = $(&apos;.item .tag .info-box&apos;);</span><br><span class="line">    let tags = [];</span><br><span class="line">    infos.each((index, info) =&gt; &#123;</span><br><span class="line">      let tagInfo = $(info);</span><br><span class="line">      let href = tagInfo.children().first().attr(&apos;href&apos;);</span><br><span class="line">      let image = tagInfo.find(&apos;div.thumb&apos;).first().data(&apos;src&apos;);</span><br><span class="line">      let title = tagInfo.find(&apos;div.title&apos;).first().text();</span><br><span class="line">      let subscribe = tagInfo.find(&apos;div.subscribe&apos;).first().text();</span><br><span class="line">      let article = tagInfo.find(&apos;div.article&apos;).first().text();  // trim 去掉空格</span><br><span class="line">      tags.push(&#123;</span><br><span class="line">        title,</span><br><span class="line">        image,</span><br><span class="line">        href: `https://juejin.im$&#123;href&#125;`,</span><br><span class="line">        subscribe: Number(subscribe.match(/^(\d+)/)[1]),</span><br><span class="line">        article: Number(article.match(/^(\d+)/)[1])</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    return tags.slice(0, 1);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-1-2-写入数据"><a href="#3-1-2-写入数据" class="headerlink" title="3.1.2 写入数据"></a>3.1.2 写入数据</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;query&#125; = <span class="built_in">require</span>(<span class="string">'../db'</span>);</span><br><span class="line">exports.tags = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">tags</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> tag <span class="keyword">of</span> tags) &#123;</span><br><span class="line">    <span class="comment">// 查询数据库是否有数据</span></span><br><span class="line">    <span class="keyword">let</span> oldTag = <span class="keyword">await</span> query(<span class="string">`SELECT * from tags WHERE name = ? LIMIT 1`</span>, [tag.title]);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(oldTag) &amp;&amp; oldTag.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">await</span> query(<span class="string">`UPDATE tags SET name=?, image=?, url=? WHERE id=?`</span>, [tag.title, tag.image, tag.href, oldTag[<span class="number">0</span>].id])</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">await</span> query(<span class="string">`INSERT INTO tags(name, image, url, subscribe, article) VALUES(?,?,?,?,?)`</span>, [tag.title, tag.image, tag.href, tag.subscribe, tag.article])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-1-3-接口查询"><a href="#3-1-3-接口查询" class="headerlink" title="3.1.3 接口查询"></a>3.1.3 接口查询</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; query &#125;=<span class="built_in">require</span>(<span class="string">'../db'</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置模板</span></span><br><span class="line">app.set(<span class="string">'view engine'</span>,<span class="string">'html'</span>);</span><br><span class="line">app.set(<span class="string">'views'</span>,path.resolve(<span class="string">'views'</span>));</span><br><span class="line">app.engine(<span class="string">'html'</span>,<span class="built_in">require</span>(<span class="string">'ejs'</span>).__express);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> &#123;tagId&#125; = req.query;</span><br><span class="line">  <span class="keyword">let</span> tags = <span class="keyword">await</span> query(<span class="string">`SELECT * FROM tags`</span>);</span><br><span class="line">  tagId = tagId ? tagId : tags[<span class="number">0</span>].id;</span><br><span class="line">  <span class="keyword">let</span> articles = <span class="keyword">await</span> query(<span class="string">`SELECT articles.* FROM articles INNER JOIN article_tag ON articles.id = article_tag.article_id WHERE article_tag.tag_id=?`</span>, [tagId])</span><br><span class="line">  res.header(<span class="string">"Content-Type"</span>, <span class="string">"application/json; charset=utf-8"</span>)</span><br><span class="line">  res.end(<span class="built_in">JSON</span>.stringify(&#123;tags, articles&#125;));</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8085</span>, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'输入8085'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/24/vue-cli3实现分环境打包/" rel="next" title="vue-cli3实现分环境打包">
+                <i class="fa fa-chevron-left"></i> vue-cli3实现分环境打包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">bzy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-步骤"><span class="nav-number">1.</span> <span class="nav-text">1. 步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-核心库"><span class="nav-number">2.</span> <span class="nav-text">2.核心库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-请求"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-安装"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-1-get请求"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.1.1 get请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-2-post请求"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.1.2 post请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-3-post应用程序-x-www-form-urlencoded"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.1.1.3 post应用程序/ x-www-form-urlencoded</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-4-post-multipart-form-data"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.1.1.4 post multipart / form-data</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-cheerio"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 cheerio</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-安装"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-使用"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-mysql"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-1-安装"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-2-连接"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2 连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-3-插入"><span class="nav-number">2.3.3.</span> <span class="nav-text">2.3.3 插入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-4-更新数据"><span class="nav-number">2.3.4.</span> <span class="nav-text">2.3.4 更新数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-5-删除数据"><span class="nav-number">2.3.5.</span> <span class="nav-text">2.3.5 删除数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-5-重连"><span class="nav-number">2.3.6.</span> <span class="nav-text">2.3.5 重连</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-调试插件"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 调试插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-编码（iconv-lite）"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 编码（iconv-lite）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-爬取数据"><span class="nav-number">3.</span> <span class="nav-text">3.1 爬取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-标签数据"><span class="nav-number">3.1.</span> <span class="nav-text">3.1.1 标签数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-写入数据"><span class="nav-number">3.2.</span> <span class="nav-text">3.1.2 写入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-接口查询"><span class="nav-number">3.3.</span> <span class="nav-text">3.1.3 接口查询</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bzy</span>
+
+  
+</div>
+<!--
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+ -->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
