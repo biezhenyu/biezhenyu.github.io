@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Watch immediate当 watch 一个变量的时候，初始化时并不会执行，如下面的例子，你需要在created的时候手动调用一次。12345678910// badcreated() &amp;#123;  this.handleBtnShow()&amp;#125;,watch: &amp;#123;  active(value) &amp;#123;    this.handleBtnShow()  &amp;#125;,&amp;">
+<meta name="description" content="Watch immediate当 watch 一个变量的时候，初始化时并不会执行，如下面的例子，你需要在created的时候手动调用一次。123456789// badcreated() &amp;#123;  this.handleBtnShow()&amp;#125;,watch: &amp;#123;  active(value) &amp;#123;    this.handleBtnShow()  &amp;#125;,&amp;#1">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue一些使用技巧">
 <meta property="og:url" content="http://yoursite.com/2019/08/21/Vue一些使用技巧/index.html">
 <meta property="og:site_name" content="bzy的博客">
-<meta property="og:description" content="Watch immediate当 watch 一个变量的时候，初始化时并不会执行，如下面的例子，你需要在created的时候手动调用一次。12345678910// badcreated() &amp;#123;  this.handleBtnShow()&amp;#125;,watch: &amp;#123;  active(value) &amp;#123;    this.handleBtnShow()  &amp;#125;,&amp;">
+<meta property="og:description" content="Watch immediate当 watch 一个变量的时候，初始化时并不会执行，如下面的例子，你需要在created的时候手动调用一次。123456789// badcreated() &amp;#123;  this.handleBtnShow()&amp;#125;,watch: &amp;#123;  active(value) &amp;#123;    this.handleBtnShow()  &amp;#125;,&amp;#1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-21T07:03:17.030Z">
+<meta property="og:updated_time" content="2019-08-21T07:24:50.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue一些使用技巧">
-<meta name="twitter:description" content="Watch immediate当 watch 一个变量的时候，初始化时并不会执行，如下面的例子，你需要在created的时候手动调用一次。12345678910// badcreated() &amp;#123;  this.handleBtnShow()&amp;#125;,watch: &amp;#123;  active(value) &amp;#123;    this.handleBtnShow()  &amp;#125;,&amp;">
+<meta name="twitter:description" content="Watch immediate当 watch 一个变量的时候，初始化时并不会执行，如下面的例子，你需要在created的时候手动调用一次。123456789// badcreated() &amp;#123;  this.handleBtnShow()&amp;#125;,watch: &amp;#123;  active(value) &amp;#123;    this.handleBtnShow()  &amp;#125;,&amp;#1">
 
 
 
@@ -353,7 +353,7 @@
       
 
       
-        <h4 id="Watch-immediate"><a href="#Watch-immediate" class="headerlink" title="Watch immediate"></a>Watch immediate</h4><p>当 watch 一个变量的时候，初始化时并不会执行，如下面的例子，你需要在created的时候手动调用一次。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">created() &#123;</span><br><span class="line">  <span class="keyword">this</span>.handleBtnShow()</span><br><span class="line">&#125;,</span><br><span class="line">watch: &#123;</span><br><span class="line">  active(value) &#123;</span><br><span class="line">    <span class="keyword">this</span>.handleBtnShow()</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h4 id="Watch-immediate"><a href="#Watch-immediate" class="headerlink" title="Watch immediate"></a>Watch immediate</h4><p>当 watch 一个变量的时候，初始化时并不会执行，如下面的例子，你需要在created的时候手动调用一次。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">created() &#123;</span><br><span class="line">  <span class="keyword">this</span>.handleBtnShow()</span><br><span class="line">&#125;,</span><br><span class="line">watch: &#123;</span><br><span class="line">  active(value) &#123;</span><br><span class="line">    <span class="keyword">this</span>.handleBtnShow()</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>添加immediate属性，这样初始化的时候也会触发<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  active: &#123;</span><br><span class="line">    handler: <span class="string">'handleBtnShow'</span>,</span><br><span class="line">    immediate: <span class="literal">true</span>,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="长列表性能优化"><a href="#长列表性能优化" class="headerlink" title="长列表性能优化"></a>长列表性能优化</h4><p>有些时候我们的组件就是纯粹的数据展示，不会有任何改变，我们就不需要 <code>Vue</code> 来劫持我们的数据。</p>
@@ -362,6 +362,10 @@
 <h4 id="事件的销毁"><a href="#事件的销毁" class="headerlink" title="事件的销毁"></a>事件的销毁</h4><p>在 js 内使用 <code>addEventListene</code> 等方式是不会自动销毁的，我们需要在组件销毁时手动移除这些事件的监听，以免造成内存泄露。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">  addEventListener(<span class="string">'click'</span>, <span class="keyword">this</span>.click, <span class="literal">false</span>)</span><br><span class="line">&#125;,</span><br><span class="line">beforeDestroy() &#123;</span><br><span class="line">  removeEventListener(<span class="string">'click'</span>, <span class="keyword">this</span>.click, <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="cnd使用"><a href="#cnd使用" class="headerlink" title="cnd使用"></a>cnd使用</h4><p><a href="https://github.com/biezhenyu/vuecli3Template/tree/master" target="_blank" rel="noopener">github地址</a></p>
+<h4 id="webpack打包完成之后的回调"><a href="#webpack打包完成之后的回调" class="headerlink" title="webpack打包完成之后的回调"></a>webpack打包完成之后的回调</h4><p>之前有个项目要删除打包文件里面js文件里面的vue的版本号。</p>
+<p>找了官方文档找不到解决办法，查找了下webpack文档，发现打包完成之后有一个回调。</p>
+<p><a href="https://webpack.docschina.org/api/compiler-hooks/#%E7%9B%91%E5%90%AC-watching-" target="_blank" rel="noopener">webpack地址</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">configureWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span><br><span class="line">    <span class="comment">// 为生产环境修改配置...</span></span><br><span class="line">    config.plugins.push(&#123;</span><br><span class="line">      apply: <span class="function">(<span class="params">compiler</span>) =&gt;</span> &#123;</span><br><span class="line">          compiler.hooks.done.tap(<span class="string">'delContent'</span>, compilation =&gt; &#123;      </span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 为开发环境修改配置...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -517,7 +521,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Watch-immediate"><span class="nav-number">1.</span> <span class="nav-text">Watch immediate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#长列表性能优化"><span class="nav-number">2.</span> <span class="nav-text">长列表性能优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件的销毁"><span class="nav-number">3.</span> <span class="nav-text">事件的销毁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cnd使用"><span class="nav-number">4.</span> <span class="nav-text">cnd使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Watch-immediate"><span class="nav-number">1.</span> <span class="nav-text">Watch immediate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#长列表性能优化"><span class="nav-number">2.</span> <span class="nav-text">长列表性能优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件的销毁"><span class="nav-number">3.</span> <span class="nav-text">事件的销毁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cnd使用"><span class="nav-number">4.</span> <span class="nav-text">cnd使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack打包完成之后的回调"><span class="nav-number">5.</span> <span class="nav-text">webpack打包完成之后的回调</span></a></li></ol></div>
             
 
           </div>
